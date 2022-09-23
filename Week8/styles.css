@@ -1,0 +1,49 @@
+div {
+border: 10px;
+border-color: cornflowerblue;
+border-style: ridge;
+border-radius: 10px;
+width: 25%;
+background-color: rgb(47, 233, 208);
+font-size: xx-large;
+text-align: center;
+}
+
+h1 {
+    color: cornflowerblue;
+    font-size: 48px;
+}
+h2 {
+    color: red;
+    font-size: 32px;
+}
+h3 {
+    color: green;
+    font-size: 32px;
+}
+li {
+    color: lightseagreen;
+    font-size: 18px;
+}
+li:hover {
+    font-size: 32px;
+}
+table {
+    border-collapse: separate;
+    width: 25%;
+    background-color: azure;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+}
+form {
+    color:darkmagenta;
+    font-size: 32px;
+    background-color: gray;
+}
+body {
+    background-color: black;
+}
