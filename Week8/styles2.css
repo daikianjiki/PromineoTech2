@@ -1,0 +1,17 @@
+body {
+    background-color: blue;
+}
+#text-2 {
+    color: red;
+}
+div {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 25%;
+}
+li:hover {
+    background-color: white;
+}
+tr:nth-child(3n) {
+    background-color: gray;
+}
