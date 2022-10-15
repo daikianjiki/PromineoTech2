@@ -1,0 +1,18 @@
+div {
+    width: 300px;
+    height: 600px;
+}
+
+div div {
+    width: 100px;
+    height: 100px;
+    outline: 2px solid;
+    float: left;
+    text-align: center;
+    font-size: 60px;
+}
+
+div div:hover {
+    background-color:blue;
+    opacity: 10%;
+}
