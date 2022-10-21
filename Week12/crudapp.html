@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="crudapp.css">
+    <title>Leave A Comment App</title>
+</head>
+<body class="container">
+    <br>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="inputName" placeholder="name">
+        <label for="floatingInput">Your Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <textarea class="form-control" id="inputText" placeholder="text"></textarea>
+        <label for="floatingText">Give Us A Comment!</label>
+    </div>
+    <div class="mb-3">
+        <button id="create-comment" type="button" class="btn btn-primary btn-lg">Create</button>
+    </div>
+
+    <div id="app">
+
+    </div>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="crudapp.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
