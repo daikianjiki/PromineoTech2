@@ -5,7 +5,6 @@ class Comment {
     }
 }
 
-
 class CommentService {
     static url = "https://6351ab5cdfe45bbd55c6d2f9.mockapi.io/users";
 
@@ -13,7 +12,7 @@ class CommentService {
         return $.get(this.url);
     }
 
-    static getcomment(id) {
+    static getComment(id) {
         return $.get(this.url + `/${id}`);
     }
 
@@ -23,7 +22,7 @@ class CommentService {
 
     static updateComment(comment) {
         return $.ajax({
-            url: this.url + `/${id}`,
+            url: this.url + `/${comment.id}`,
             dataType: 'json',
             data: JSON.stringify(comment),
             contentType: 'application/json',
@@ -46,7 +45,7 @@ class DOMManager {
         CommentService.getAllComments().then(comments => this.render(comments));
     }
 
-    static createComment(comment) {
+    static createComment(name, comment) {
         CommentService.createComment(new Comment(name, comment))
         .then(() => {
             return CommentService.getAllComments();
@@ -69,14 +68,16 @@ class DOMManager {
         $('#app').empty();
         for (let comment of comments) {
             $('#app').prepend(
-                `<div id="${comment._id} class="card">
-                    <div class="card-body>
-                    <h5 class="card-title">${comment.name}</h5>
-                    <p class="card-text">${comment.comment}</p>
-                </div>
-                <div class="mb-3">
-                <button class="btn btn-warning" onclick="DOMManager.updateComment('${comment._id}')">Update</button>
-                <button class="btn btn-danger" onclick="DOMManager.deleteComment('${comment._id}')">Delete</button>
+                `<div id="${comment.id} class="card">
+                    <figure class="test-center'>
+                        <blockquote class="blockquote">
+                            <p>${comment.comment}</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            ${comment.name}
+                        </figurecaption>
+                    </figure>
+                    <button class="btn btn-danger" onclick="DOMManager.deleteComment('${comment.id}')">Delete</button>
                 </div>` 
             );
         }
@@ -85,6 +86,9 @@ class DOMManager {
 
 $(`#create-comment`).on('click', () => {
     DOMManager.createComment($('#inputName').val());
+    DOMManager.createComment($('#inputText').val());
     $('#inputName').val('');
     $('#inputText').val('');
 })
+
+DOMManager.getAllComments();
