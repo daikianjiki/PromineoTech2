@@ -54,6 +54,21 @@ class DOMManager {
             this.render(comments)
         });
     }
+    static updateComment(id) {
+        for (let key in id) {
+                let thisId = `${id[key]}`;
+                console.log(thisId.text);
+            }
+            //check to see the id that's passing matches the edit button - DONE
+            //find a field where the user can edit them - DONE
+            //I think now I have to make the onclick for save-changes button or somethhing...
+        CommentService.updateComment(id)
+        .then(() => {
+            return CommentService.getAllComments();
+        })
+      .then((comments) => this.render(comments));
+    
+    }
 
     static deleteComment(id) {
         CommentService.deleteComment(id)
@@ -61,6 +76,7 @@ class DOMManager {
             return CommentService.getAllComments();
         })
         .then((comments) => this.render(comments));
+        $(`#${id}`).remove();
     }
 
     static render(comments) {
@@ -77,6 +93,33 @@ class DOMManager {
                             ${comment.name}
                         </figurecaption>
                     </figure>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="DOMManager.updateComment('${comment.id}')">Edit</button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="inputName">
+                                        <label for="floatingText" class="col-form-label">Updated Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="inputText">
+                                        <label for="floatingText" class="col-form-label">Updated Comment</label>
+                                    </div>
+                                </form> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" id="edit-comment" class="btn btn-primary">Save changes</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-danger" onclick="DOMManager.deleteComment('${comment.id}')">Delete</button>
                 </div>` 
             );
@@ -85,8 +128,12 @@ class DOMManager {
 }
 
 $(`#create-comment`).on('click', () => {
-    DOMManager.createComment($('#inputName').val());
-    DOMManager.createComment($('#inputText').val());
+    DOMManager.createComment($('#inputName').val(), $('#inputText').val());
+    $('#inputName').val('');
+    $('#inputText').val('');
+})
+$(`#edit-comment`).on('click', () => {
+    DOMManager.updateComment($('#inputName').val(), $('#inputText').val());
     $('#inputName').val('');
     $('#inputText').val('');
 })
