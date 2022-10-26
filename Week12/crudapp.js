@@ -30,6 +30,13 @@ class CommentService {
         });
     }
 
+    static editComment(thisId) {
+        return $.ajax({
+            url:this.url + `/${thisId}`,
+            type: 'PUT'
+        });
+    }
+
     static deleteComment(id) {
         return $.ajax({
             url: this.url + `/${id}`,
@@ -57,12 +64,10 @@ class DOMManager {
     static updateComment(id) {
         for (let key in id) {
                 let thisId = `${id[key]}`;
-                console.log(thisId.text);
+                console.log(thisId);
+                CommentService.updateComment(thisId)
             }
-            //check to see the id that's passing matches the edit button - DONE
-            //find a field where the user can edit them - DONE
-            //I think now I have to make the onclick for save-changes button or somethhing...
-        CommentService.updateComment(id)
+        Comment.Service.updateComment(thisId)
         .then(() => {
             return CommentService.getAllComments();
         })
@@ -93,7 +98,7 @@ class DOMManager {
                             ${comment.name}
                         </figurecaption>
                     </figure>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="DOMManager.updateComment('${comment.id}')">Edit</button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -115,7 +120,7 @@ class DOMManager {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" id="edit-comment" class="btn btn-primary">Save changes</button>
+                                <button type="button" id="edit-comment" class="btn btn-primary"  onclick="DOMManager.updateComment('${comment.id}')">Save changes</button>
                             </div>
                             </div>
                         </div>
