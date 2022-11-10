@@ -61,18 +61,19 @@ class DOMManager {
             this.render(comments)
         });
     }
+
     static updateComment(id) {
+    function thisId() {
         for (let key in id) {
                 let thisId = `${id[key]}`;
                 console.log(thisId);
-                CommentService.updateComment(thisId)
             }
-        Comment.Service.updateComment(thisId)
+        }
+        Comment.Service.updateComment(thisId())
         .then(() => {
             return CommentService.getAllComments();
         })
       .then((comments) => this.render(comments));
-    
     }
 
     static deleteComment(id) {
