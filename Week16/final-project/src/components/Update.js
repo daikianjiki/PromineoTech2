@@ -23,6 +23,7 @@ export default function Update() {
         axios.put(`https://63745b7648dfab73a4de2e1d.mockapi.io/order/${id}`, {
             firstName,
             lastName,
+            email,
             checkbox
 	    })
     }
